@@ -1,0 +1,73 @@
+
+#include <iostream>
+using namespace std;
+class Node{
+    public:
+    int data;
+    Node* next;
+    
+    Node(int val){
+        this->data = val;
+       this->next = NULL;
+    }
+};
+
+class queue{
+    Node* front;
+    Node* back;
+    
+    public:
+    queue(){
+        front = NULL;
+        back = NULL;
+    }
+    
+    void push(int x){
+        Node * temp = new Node(x);
+        if(front == NULL){
+            front = temp;
+            back = temp;
+            return;
+        }
+        back-> next = temp;
+        back = back-> next;
+    }
+    
+    void pop(){
+        if(front == NULL){
+            cout<<"Queue underflow"<<endl;
+            return;
+        }
+        Node* todelete = front;
+        front = front-> next;
+        
+        delete todelete;
+    }
+    int peek(){
+      if(front == NULL){
+            cout<<"No element in queue"<<endl;
+            return -1;
+        }
+        return front-> data;
+    }
+    
+    bool isEmpty(){
+       if(front == NULL){
+           return true;
+        }
+        return false;
+    }
+};
+int main(){
+    queue q;
+    q.push(5);
+    cout<<q.peek()<<endl;
+    cout<<q.isEmpty()<<endl;
+    q.push(7);
+    q.push(6);
+    cout<<q.peek()<<endl;
+    q.pop();
+    cout<<q.peek()<<endl;
+    
+    return 0;
+}
